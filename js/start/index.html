@@ -1,0 +1,15 @@
+<script>
+    var data = sessionStorage.getItem('js_data')
+    if(!data){
+        sessionStorage.setItem('js_data', '1')
+        window.location.replace('../1/')
+    }else{
+        if (isNaN(data)){
+            sessionStorage.removeItem('js_data')
+            sessionStorage.setItem('js_data', '1')
+            window.location.replace('../1/')
+        }else{
+            window.location.replace(`../${data}/`)
+        }
+    }
+</script>

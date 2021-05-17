@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Goblin+One&display=swap');
+h1{
+    font-family: 'Goblin One';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 100px;
+    color: #00031f2a;
+    transform: translate(-50%, -50%);
+}
+h1::before{
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #00031F;
+    animation: load 4500ms linear infinite;
+    overflow: hidden;
+}
+@keyframes load {
+    0% {
+      width: 0;
+    }
+    10%{
+        width: 5%;
+    }
+    40%{
+        width: 50%;
+    }
+    70%{
+        width: 60%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+@media (max-width:570px) {
+    h1{
+        font-size: 70px;
+    }
+}
+@media (max-width:380px) {
+    h1{
+        font-size: 40px;
+    }
+}

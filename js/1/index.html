@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/all.css">
+    <title>MOPED | JS#1</title>
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Goblin+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
+
+        .exercice {
+            position: absolute;
+            width: 50%;
+            left: 50%;
+            height: 100%;
+            border-right: solid 2px rgb(32, 32, 32);
+        }
+
+        h1 {
+            font-family: 'Goblin One';
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        p {
+            font-family: 'Suez One';
+            position: absolute;
+            width: 100%;
+            top: 20%;
+            text-align: center;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .course {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            border-right: solid 2px rgb(32, 32, 32);
+        }
+
+        iframe {
+            border: none;
+        }
+
+        input {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: '900';
+            width: 10%;
+        }
+
+        #exercice {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 40%;
+            font-size: 20px;
+            font-weight: bolder;
+            padding: 10px;
+            border: none;
+            box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+            -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+            border-radius: 20px;
+        }
+
+        #exercice:focus {
+            outline: none;
+        }
+
+        .submit {
+            position: absolute;
+            width: 80%;
+            height: 5%;
+            border: none;
+            border-radius: 10px;
+            background-color: #00031F;
+            color: aliceblue;
+            font-family: 'Goblin One';
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        error {
+            position: absolute;
+            opacity: 70%;
+            height: 10%;
+            width: 90%;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 20px;
+        }
+
+        .help {
+            position: absolute;
+            width: 80%;
+            height: 5%;
+            border: none;
+            border-radius: 10px;
+            background-color: #404aa5;
+            color: aliceblue;
+            font-family: 'Goblin One';
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        error t {
+            font-family: 'Suez One';
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            text-align: center;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        code {
+            font-size: 20px;
+        }
+
+        @media (max-width:668px) {
+            .course {
+                width: 100%;
+                height: 50%;
+            }
+            h1{
+                display: none;
+            }
+            .exercice {
+                top: 50%;
+                width: 100%;
+                height: 50%;
+                left: 0;
+            }
+        }
+    </style>
+    <div id="progress"
+        style="position:fixed;width: 100%;background-color: rgb(0, 68, 255);height: 15px;z-index: 10000; border-radius: 0px 20px 20px 00px;box-shadow: 0px 0px 18px -6px rgba(0,0,0,0.75);-webkit-box-shadow: 0px 0px 18px -6px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 18px -6px rgba(0,0,0,0.75);">
+    </div>
+    <div class="course">
+        <iframe src="https://www.lehtml.com/js/var.htm" width="100%" height="100%"></iframe>
+    </div>
+    <div class="exercice">
+        <h1>Exercice</h1>
+        <p>Créez une variable nommé <code>nomPaul</code>, donnez lui la valeur <code>Mercier</code></p>
+        <textarea name="exercice" id="exercice" cols="30" rows="10" placeholder="Entrez votre code ICI"></textarea>
+        <button class="submit">Vérifier</button>
+        <button class="help">Aidez-moi</button>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <script src="../../assets/js/alert.js"></script>
+    <script>
+        swal('Bienvenu sur MOPED... Vous étudiez les variables')
+        const data = sessionStorage.getItem('js_data')
+        if (!data) {
+            window.location.replace('../start/')
+        } else {
+            if ('1' <= data) {
+                const submit = document.getElementsByClassName('submit')[0]
+                const code = document.getElementById('exercice')
+                const doc = document.getElementsByClassName('exercice')[0]
+                const help = document.getElementsByClassName('help')[0]
+                help.addEventListener('click', ()=>{
+                    Help('Vérifiez bien les guillemets et les majuscules')
+                })
+                submit.addEventListener('click', () => {
+                    if (code.value === 'var nomPaul = "Mercier"') {
+                        success(2)
+                    } else {
+                        if (code.value === "var nomPaul = 'Mercier'") {
+                            success(2)
+                        } else {
+                            error()
+                        }
+                    }
+                })
+            } else {
+                window.location.replace('../start/')
+            }
+        }
+    </script>
+    <script src="../../assets/js/progressJS.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/all.css">
+    <title>MOPED | JS#8</title>
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Goblin+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
+
+        .exercice {
+            position: absolute;
+            width: 50%;
+            left: 50%;
+            height: 100%;
+            border-right: solid 2px rgb(32, 32, 32);
+        }
+
+        h1 {
+            font-family: 'Goblin One';
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        p {
+            font-family: 'Suez One';
+            position: absolute;
+            width: 100%;
+            top: 20%;
+            text-align: center;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .course {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            border-right: solid 2px rgb(32, 32, 32);
+        }
+
+        iframe {
+            border: none;
+        }
+
+        input {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: '900';
+            width: 10%;
+        }
+
+        .help {
+            position: absolute;
+            width: 80%;
+            height: 5%;
+            border: none;
+            border-radius: 10px;
+            background-color: #404aa5;
+            color: aliceblue;
+            font-family: 'Goblin One';
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        #exercice {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 10%;
+            font-size: 20px;
+            font-weight: bolder;
+            padding: 10px;
+            border: none;
+            box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+            -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+            border-radius: 20px;
+        }
+
+        #exercice:focus {
+            outline: none;
+        }
+
+        .submit {
+            position: absolute;
+            width: 80%;
+            height: 5%;
+            border: none;
+            border-radius: 10px;
+            background-color: #00031F;
+            color: aliceblue;
+            font-family: 'Goblin One';
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        error {
+            position: absolute;
+            opacity: 70%;
+            height: 10%;
+            width: 90%;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 20px;
+        }
+
+        code {
+            font-size: 20px;
+        }
+
+        error t {
+            font-family: 'Suez One';
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            text-align: center;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        @media (max-width:668px) {
+            .course {
+                width: 100%;
+                height: 50%;
+            }
+
+            h1 {
+                display: none;
+            }
+
+            .exercice {
+                top: 50%;
+                width: 100%;
+                height: 50%;
+                left: 0;
+            }
+        }
+        input {
+            position: relative;
+            font-family: 'Courier New', Courier, monospace;
+            top: -3px;
+            width: 4%;
+            border: 1px solid black;
+            font-weight: bolder;
+            font-size: 15px;
+        }
+    </style>
+    <div id="progress"
+        style="position:fixed;width: 100%;background-color: rgb(0, 68, 255);height: 15px;z-index: 10000; border-radius: 0px 20px 20px 00px;box-shadow: 0px 0px 18px -6px rgba(0,0,0,0.75);-webkit-box-shadow: 0px 0px 18px -6px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 18px -6px rgba(0,0,0,0.75);">
+    </div>
+    <div class="course">
+        <iframe src="https://www.lehtml.com/js/opera.htm" width="100%" height="100%"></iframe>
+    </div>
+    <div class="exercice">
+        <h1>Exercice</h1>
+        <p>En une seul ligne montrez que  <code>inc</code> est égal à <code>8</code> fois <code>10</code> ET le reste de la division de <code>8</code> par <code>14</code> 
+        </p>
+        <input type="text" name="" id="exercice" placeholder="Entrez votre code ICI">
+        <button class="submit">Vérifier</button>
+        <button class="help">Aidez-moi</button>
+    </div>
+    <script src="../../assets/js/alert.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <script>
+        document.getElementsByClassName('help')[0].addEventListener('click', () => {
+            Help('Lis bien la leçon (modulo, multiplication...), inc est une variable')
+        })
+        const data = sessionStorage.getItem('js_data')
+        if (!data) {
+            window.location.replace('../start/')
+        } else {
+            if ('8' <= data) {
+                const submit = document.getElementsByClassName('submit')[0]
+                const code = document.getElementById('exercice')
+                const doc = document.getElementsByClassName('exercice')[0]
+                submit.addEventListener('click', () => {
+                    if (code.value === 'var inc = 8*10 && 8%14') {
+                        success(9)
+                    } else {
+                        error()
+                    }
+                })
+            } else {
+                window.location.replace('../start/')
+            }
+        }
+    </script>
+    <script src="../../assets/js/progressJS.js"></script>
+</body>
+
+</html>

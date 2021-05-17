@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Goblin+One&display=swap');
+h1{
+    font-family: 'Goblin One';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    font-size: 40px;
+    color: #00031f;
+    transform: translate(-50%, -50%);
+}
+.list{
+    position: relative;
+    top: 130px;
+    display: flex;
+}
+.hero{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.card{
+    background-color: white;
+    box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+    width: 250px;
+    height: 450px;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    margin: 1%;
+}
+.card h2{
+    width: 100%;
+    text-align: center;
+    font-family: 'Goblin One';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+.card p{
+    font-family: 'Suez One';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    color: rgba(0, 0, 0, 0.376);
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    text-align: center;
+    width: 90%;
+    top: 45%;
+}
+.card button{
+    position: absolute;
+    border: none;
+    background-color: #00031F;
+    color: aliceblue;
+    height: 10%;
+    font-family: 'Suez One';
+    width: 80%;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    cursor: pointer;
+}
+button:disabled{
+    background-color: #00031f77;
+}
+@media (max-width:760px) {
+    .list{
+        flex-direction: column;
+    }
+    .card{
+        width: 70vh;
+    }
+    .hero{
+        top: 85%;
+    }
+}
